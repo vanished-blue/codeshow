@@ -1,5 +1,4 @@
 winston = require('../common/log').logFactory.getLogger('MaliceAddress')
-TaskGenerator = require "./taskGenerator"
 Promise = require 'bluebird'
 fs = require 'fs-extra-promise'
 { exec } = require 'child-process-promise'
@@ -9,9 +8,7 @@ _ = require 'underscore'
 { extend, partial, compact, union, keys } = _
 mkdir = require 'mkdirp'
 multer = require 'multer'
-fileMD5 = require('md5-file-promise')()
 MD5 = require('md5')
-models = require '../es/models'
 moment = require 'moment'
 convert = require 'convert-units'
 cors = require 'cors'
@@ -135,6 +132,7 @@ exports.init = () ->
         extend json, { filename, lastUpdateDate, filesize }
     .then (json) ->
       res.json json: json
+    #处理自定义错误
     .catch FileReadError, (err) ->
       res.json ERROR_MSG: err.message
     .catch partial(catchError, _, res)

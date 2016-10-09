@@ -1,9 +1,5 @@
 _ = require('lodash')
-async = require('async')
-client = require('./es_client')
-isPathValid = require('./isPathValid')
 Promise = require 'bluebird'
-esCommon = require './common'
 redis = require 'redis'
 
 Promise.promisifyAll redis.RedisClient.prototype
