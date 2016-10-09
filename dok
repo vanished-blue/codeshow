@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ $1 = "rm" ]; then
+    docker rm -f $(docker ps -aq)
+elif [ $1 = "enter" ]; then
+    docker exec -it butler_web_1 bash
+elif [ $1 = "rs" ]; then
+    docker restart butler_web_1
+elif [ $1 = "stop" ]; then
+    docker stop butler_web_1
+fi

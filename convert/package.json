@@ -1,0 +1,25 @@
+{
+  "name": "tencent-virus-api-proxy-server",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "coffee-script": "^1.10.0",
+    "express": "^4.13.4",
+    "lodash": "^4.11.1",
+    "md5": "^2.1.0",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.trantect.com:10022/grug.huang/tencent-virus-api-proxy-server.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

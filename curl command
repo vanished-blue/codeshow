@@ -1,0 +1,91 @@
+Relational DB -> Databases -> Tables -> Rows -> Columns
+Elasticsearch -> Indices   -> Types  -> Documents -> Fields
+
+
+GET /_count
+{
+    "query": {
+        "match_all": {}
+    }
+}
+
+
+curl -XGET 'localhost:9200/_count?pretty' -d '
+{
+    "query": {
+        "match_all": {}
+    }
+}'
+
+curl -i -XGET 'localhost:9200/'
+
+GET  'http://localhost:9200/'  -U -s
+
+GET 'http://localhost:9200/_count?pretty'
+
+
+#Fetch the document
+GET /megacorp/employee/1
+GET /schema_ver/version/_version
+
+GET "http://localhost:9200/schema_ver/version/_version?pretty"
+
+#output is:
+{
+  "_index" : "schema_ver",
+  "_type" : "version",
+  "_id" : "_version",
+  "_version" : 15,
+  "found" : true,
+  "_source":{"version":15,"createTime":"2015-11-30T09:20:29.455Z"}
+}
+
+#check whether it exists
+HEAD "http://localhost:9200/schema_ver/version/_version?pretty"
+
+
+#fetch all the document
+GET "http://localhost:9200/schema_ver/version/_search?pretty"
+
+
+
+curl -XPUT "localhost:9200/schema_ver/version/_version?pretty" -d '{
+	"createTime": "2016-04-08T02:08:03.164Z",
+	"version": 0
+}'
+
+curl -i -XHEAD http://localhost:9200/admins_1/superadmin/AVPz1uCTUvBW61Ms4rzE
+HEAD http://localhost:9200/admins_1/superadmin/AVPz1uCTUvBW61Ms4rzE
+
+
+curl  http://localhost:9200/admins_1/superadmin/_count?pretty
+
+HEAD http://localhost:9200/admins_1/superadmin/_count
+
+
+curl -XGET localhost:9200/_alias?pretty
+curl -XGET localhost:9200/_aliases?pretty
+
+curl -XPOST http://localhost:9200/_aliases -d '
+{
+    "actions" : [
+        { "remove" : { "index" : "admins_1", "alias" : "admins" } },
+        { "add" : { "index" : "admins", "alias" : "admins_1" } }
+    ]
+}'
+
+curl -XPOST http://localhost:9200/_aliases -d '
+{
+    "actions" : [
+        { "remove" : { "index" : "admins_1", "alias" : "admins" } },
+        { "add" : { "index" : "schema_ver", "alias" : "schema_ver3" } }
+    ]
+}'
+
+curl -XPOST http://localhost:9200/_aliases -d '
+{
+    "actions" : [
+        { "add" : { "index" : "admins", "alias" : "admins_1" } }
+    ]
+}'
+

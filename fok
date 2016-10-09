@@ -1,0 +1,42 @@
+#!/bin/bash
+
+fig="fig -p butler"
+
+cd ~/xjy
+
+start() {
+    ${fig} up -d;
+    while [[ ! `curl -s localhost:3000/login | grep "用户名" ` ]]; do
+	  echo "try"
+	  sleep 1
+    done
+    echo "OK!"
+}
+
+case "$1" in
+  restart)
+	${fig} stop;
+	start;
+	;;
+  start)
+	start;
+	;;
+  stop)
+	${fig} stop
+	;;
+  log)
+    ${fig} logs web
+	;;
+  logsweb)
+	${fig} logs web
+	;;
+  2)
+	${fig} logs web
+	;;
+  rm)
+	${fig} rm --f
+	;;
+  *)
+	echo "Unknown commands."
+esac
+
